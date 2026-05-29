@@ -366,13 +366,12 @@
           </radialGradient>
         </defs>
 
-        <!-- Background Container Area -->
         <rect width="600" height="600" fill="none" />
 
         <!-- ========================================== -->
         <!--  300 LEVEL UPPER BOWL TIER (OUTER RING)  -->
         <!-- ========================================== -->
-        <!-- Bottom End Upper Bowl (333, 334, 301, 302, 303) -->
+        <!-- Bottom End Upper Bowl (Shoot End) -->
         <g class="zone" data-id="ugz-shoot-upper" fill="#bc1c24" stroke="#041e42" stroke-width="1.2">
           <path d="M 230 550 A 255 255 0 0 1 110 500 L 155 440 A 175 175 0 0 0 240 475 Z" />
           <path d="M 110 500 A 255 255 0 0 1 50 400 L 110 365 A 175 175 0 0 0 155 440 Z" />
@@ -381,7 +380,7 @@
           <path d="M 490 500 A 255 255 0 0 0 550 400 L 490 365 A 175 175 0 0 1 445 440 Z" />
         </g>
         
-        <!-- Top End Upper Bowl (315, 316, 317, 318, 319) -->
+        <!-- Top End Upper Bowl (Defend End) -->
         <g class="zone" data-id="ugz-defend-upper" fill="#bc1c24" stroke="#041e42" stroke-width="1.2">
           <path d="M 230 50 A 255 255 0 0 0 110 100 L 155 160 A 175 175 0 0 1 240 125 Z" />
           <path d="M 110 100 A 255 255 0 0 0 50 200 L 110 235 A 175 175 0 0 1 155 160 Z" />
@@ -390,37 +389,30 @@
           <path d="M 490 100 A 255 255 0 0 1 550 200 L 490 235 A 175 175 0 0 0 445 160 Z" />
         </g>
 
-        <!-- Right Upper Sidelines (322, 323, 324, 325, 326) -->
+        <!-- Upper Sidelines -->
         <g class="zone" data-id="usideline" fill="#e66c24" stroke="#041e42" stroke-width="1.2">
           <path d="M 550 200 A 255 255 0 0 1 565 260 L 495 260 A 175 175 0 0 0 490 235 Z" />
           <path d="M 565 260 A 255 255 0 0 1 565 340 L 495 340 A 175 175 0 0 0 495 260 Z" />
           <path d="M 565 340 A 255 255 0 0 1 550 400 L 490 365 A 175 175 0 0 0 495 340 Z" />
-        </g>
-        <!-- Left Upper Sidelines (311, 312, 313, 305, 306) -->
-        <g class="zone" data-id="usideline" fill="#e66c24" stroke="#041e42" stroke-width="1.2">
           <path d="M 50 200 A 255 255 0 0 0 35 260 L 105 260 A 175 175 0 0 1 110 235 Z" />
           <path d="M 35 260 A 255 255 0 0 0 35 340 L 105 340 A 175 175 0 0 1 105 260 Z" />
           <path d="M 35 340 A 255 255 0 0 0 50 400 L 110 365 A 175 175 0 0 1 105 340 Z" />
         </g>
 
-        <!-- Left/Right Upper Centers (307, 308, 309, 310, 327, 328, 329, 330) -->
-        <g class="zone" data-id="ucenter" fill="#f4b41c" stroke="#041e42" stroke-width="1.2">
-          <!-- Left Center -->
-          <path d="M 35 260 L 35 290 L 105 290 L 105 260 Z" fill="#246ca4" />
-          <path d="M 35 290 L 35 340 L 105 340 L 105 290 Z" fill="#246ca4" />
-          <!-- Right Center -->
-          <path d="M 565 260 L 565 290 L 495 290 L 495 260 Z" fill="#246ca4" />
-          <path d="M 565 290 L 565 340 L 495 340 L 495 290 Z" fill="#246ca4" />
+        <!-- Upper Centers -->
+        <g class="zone" data-id="ucenter" fill="#246ca4" stroke="#041e42" stroke-width="1.2">
+          <path d="M 35 260 L 35 290 L 105 290 L 105 260 Z" />
+          <path d="M 35 290 L 35 340 L 105 340 L 105 290 Z" />
+          <path d="M 565 260 L 565 290 L 495 290 L 495 260 Z" />
+          <path d="M 565 290 L 565 340 L 495 340 L 495 290 Z" />
         </g>
 
-        <!-- Inner Rows 1&2 Rings for Upper Bowl -->
+        <!-- Rows 1&2 Inner Upper Ring Splits -->
         <g class="zone" data-id="ucs-12" fill="#542454" stroke="#041e42" stroke-width="1.2">
-          <!-- Sideline inner row slices -->
           <path d="M 105 235 A 175 175 0 0 1 105 365 L 120 350 A 150 150 0 0 0 120 250 Z" />
           <path d="M 495 235 A 175 175 0 0 0 495 365 L 480 350 A 150 150 0 0 1 480 250 Z" />
         </g>
         <g class="zone" data-id="ugz-12" fill="#245c34" stroke="#041e42" stroke-width="1.2">
-          <!-- Goal ends inner row slices -->
           <path d="M 120 250 A 150 150 0 0 0 480 250 L 465 235 A 175 175 0 0 1 135 235 Z" />
           <path d="M 120 350 A 150 150 0 0 1 480 350 L 465 365 A 175 175 0 0 0 135 365 Z" />
         </g>
@@ -428,28 +420,23 @@
         <!-- ========================================== -->
         <!--  CLUB LEVEL MIDDLE TIER RING              -->
         <!-- ========================================== -->
-        <!-- Club Level Goal Zones -->
         <g class="zone" data-id="club-gz" fill="#e4841c" stroke="#041e42" stroke-width="1">
           <path d="M 140 180 A 150 150 0 0 1 460 180 L 440 205 A 120 120 0 0 0 160 205 Z" />
           <path d="M 140 420 A 150 150 0 0 0 460 420 L 440 395 A 120 120 0 0 1 160 395 Z" />
         </g>
-        <!-- Club Level Row 1 Rings -->
         <g class="zone" data-id="club-gz-r1" fill="#fca41c" stroke="#041e42" stroke-width="1">
           <path d="M 160 205 A 120 120 0 0 0 440 205 L 430 215 A 110 110 0 0 1 170 215 Z" />
-          <path d="M 160 395 A 120 120 0 0 1 440 395 L 430 385 A 110 110 0 0 0 170 385 Z" />
+          <path d="M 160 395 A 120 120 0 0 1 440 395 L 430 385 Aut O 110 110 0 0 0 170 385 Z" />
         </g>
-        <!-- Club Level Centers -->
         <g class="zone" data-id="club-center" fill="#7c848c" stroke="#041e42" stroke-width="1">
           <path d="M 140 180 A 150 150 0 0 1 140 420 L 165 395 A 120 120 0 0 0 165 205 Z" />
           <path d="M 460 180 A 150 150 0 0 0 460 420 L 435 395 A 120 120 0 0 1 435 205 Z" />
         </g>
 
-
         <!-- ========================================== -->
-        <!--  100 LEVEL LOWER BOWL TIER (LOWER BOWLS)   -->
+        <!--  100 LEVEL LOWER BOWL TIER                -->
         <!-- ========================================== -->
-        
-        <!-- Lower Goal Zone Shoot 2x Ends (101, 102, 133, 134) -->
+        <!-- Shoot Ends -->
         <g class="zone" data-id="lgz-shoot" fill="#0c5474" stroke="#041e42" stroke-width="0.8">
           <path d="M 180 430 A 100 100 0 0 0 420 430 L 400 405 A 80 80 0 0 1 200 405 Z" />
         </g>
@@ -460,7 +447,7 @@
           <path d="M 215 385 A 65 65 0 0 1 385 385 L 375 370 A 50 50 0 0 0 225 370 Z" />
         </g>
 
-        <!-- Lower Goal Zone Defend 2x Ends (115, 116, 117, 118, 119, 120) -->
+        <!-- Defend Ends -->
         <g class="zone" data-id="lgz-defend" fill="#4c2c74" stroke="#041e42" stroke-width="0.8">
           <path d="M 180 170 A 100 100 0 0 1 420 170 L 400 195 A 80 80 0 0 0 200 195 Z" />
         </g>
@@ -471,14 +458,13 @@
           <path d="M 215 215 A 65 65 0 0 0 385 215 L 375 230 A 50 50 0 0 1 225 230 Z" />
         </g>
 
-        <!-- Sidelines Shoot/Defend Slices (103, 104, 105, 129, 130, 131, 132) -->
+        <!-- Sidelines Rings -->
         <g class="zone" data-id="sideline-defend" fill="#543414" stroke="#041e42" stroke-width="0.8">
           <path d="M 180 170 A 100 100 0 0 0 180 270 L 205 270 A 80 80 0 0 1 200 195 Z" />
         </g>
         <g class="zone" data-id="sideline-premier-defend" fill="#7c5c2c" stroke="#041e42" stroke-width="0.8">
           <path d="M 205 170 A 80 80 0 0 0 205 270 L 220 270 A 65 65 0 0 1 215 195 Z" />
         </g>
-
         <g class="zone" data-id="sideline-shoot" fill="#2c5c14" stroke="#041e42" stroke-width="0.8">
           <path d="M 180 270 A 100 100 0 0 0 180 430 L 200 405 A 80 80 0 0 1 205 270 Z" />
         </g>
@@ -486,8 +472,8 @@
           <path d="M 205 270 A 80 80 0 0 0 200 405 L 215 385 A 65 65 0 0 1 220 270 Z" />
         </g>
 
-        <!-- Blue Line Slices -->
-        <g class="zone" data-id="blueline-defend" fill="#245494" stroke="#041e42" stroke-width="0.8">
+        <!-- Blue Line Splits -->
+        <g class="zone" data-id="blueline-shoot" fill="#245494" stroke="#041e42" stroke-width="0.8">
           <path d="M 420 170 A 100 100 0 0 1 420 270 L 395 270 A 80 80 0 0 0 400 195 Z" />
         </g>
         <g class="zone" data-id="blueline-premier-shoot" fill="#4c84bc" stroke="#041e42" stroke-width="0.8">
@@ -497,94 +483,65 @@
           <path d="M 420 270 A 100 100 0 0 1 420 430 L 400 405 A 80 80 0 0 0 395 270 Z" />
         </g>
 
-        <!-- Center Ice Sections (106, 107, 108, 123, 124, 125) -->
+        <!-- Center Ice Configurations -->
         <g class="zone" data-id="center-ice" fill="#a44ca4" stroke="#041e42" stroke-width="0.8">
-          <rect x="220" y="230" width="30" height="140" fill="#a44ca4" />
-          <rect x="350" y="230" width="30" height="140" fill="#a44ca4" />
+          <rect x="220" y="230" width="30" height="140" />
+          <rect x="350" y="230" width="30" height="140" />
         </g>
         <g class="zone" data-id="center-ice-premier" fill="#e46ce4" stroke="#041e42" stroke-width="0.8">
-          <rect x="250" y="230" width="25" height="140" fill="#e46ce4" />
-          <rect x="325" y="230" width="25" height="140" fill="#e46ce4" />
+          <rect x="250" y="230" width="25" height="140" />
+          <rect x="325" y="230" width="25" height="140" />
         </g>
 
-        <!-- Glass Row 2 Ring -->
+        <!-- Glass Row 2 -->
         <g class="zone" data-id="glass-r2" fill="#dc2424" stroke="#041e42" stroke-width="0.8">
           <path d="M 230 240 A 45 45 0 0 0 370 240 L 370 245 A 40 40 0 0 1 230 245 Z" />
           <path d="M 230 360 A 45 45 0 0 1 370 360 L 370 355 A 40 40 0 0 0 230 355 Z" />
         </g>
 
-        <!-- ========================================== -->
-        <!--  ALL-INCLUSIVE PREMIUM SPACES (INNERMOST)   -->
-        <!-- ========================================== -->
-        <!-- Corona Beach House -->
-        <g class="zone" data-id="corona-beach" fill="#fca41c" stroke="#ffffff" stroke-width="0.8">
-          <rect x="225" y="245" width="150" height="12" fill="#cca43c" />
-          <rect x="225" y="343" width="150" height="12" fill="#cca43c" />
+        <!-- Premium Club Platforms -->
+        <g class="zone" data-id="corona-beach" fill="#cca43c" stroke="#ffffff" stroke-width="0.8">
+          <rect x="225" y="245" width="150" height="12" />
+          <rect x="225" y="343" width="150" height="12" />
         </g>
-        
-        <!-- Amerant Vault -->
-        <g class="zone" data-id="amerant-vault" fill="#9c9c9c" stroke="#ffffff" stroke-width="0.8">
-          <rect x="225" y="257" width="40" height="15" fill="#acacac" />
-          <rect x="335" y="257" width="40" height="15" fill="#acacac" />
-          <rect x="225" y="328" width="40" height="15" fill="#acacac" />
-          <rect x="335" y="328" width="40" height="15" fill="#acacac" />
+        <g class="zone" data-id="amerant-vault" fill="#acacac" stroke="#ffffff" stroke-width="0.8">
+          <rect x="225" y="257" width="40" height="15" />
+          <rect x="335" y="257" width="40" height="15" />
+          <rect x="225" y="328" width="40" height="15" />
+          <rect x="335" y="328" width="40" height="15" />
         </g>
-
-        <!-- Glass Row 1 Rings (Rinkside) -->
         <g class="zone" data-id="glass-r1" fill="#bc0c24" stroke="#ffffff" stroke-width="0.8">
           <rect x="225" y="272" width="150" height="4" />
           <rect x="225" y="324" width="150" height="4" />
         </g>
 
-
-        <!-- ========================================== -->
-        <!--  RINK ICE SURFACE                          -->
-        <!-- ========================================== -->
+        <!-- Central Arena Core Rink Layout -->
         <g id="ice-rink">
           <rect x="235" y="280" width="130" height="40" rx="12" ry="12" fill="url(#iceSurface)" stroke="#a4dcff" stroke-width="1.5" />
-          <!-- Center line & Red line -->
           <line x1="300" y1="280" x2="300" y2="320" stroke="#dc2424" stroke-width="1" />
           <circle cx="300" cy="300" r="8" fill="none" stroke="#a4dcff" stroke-width="1" />
-          <!-- Blue lines -->
           <line x1="265" y1="280" x2="265" y2="320" stroke="#244cbc" stroke-width="1.2" />
           <line x1="335" y1="280" x2="335" y2="320" stroke="#244cbc" stroke-width="1.2" />
-          <!-- Ice Texts -->
           <text x="250" y="297" class="ice-text" transform="rotate(-90 250 297)">PANTHERS DEFEND 2X</text>
           <text x="350" y="297" class="ice-text" transform="rotate(90 350 297)">PANTHERS SHOOT 2X</text>
         </g>
 
-        <!-- ========================================== -->
-        <!--  DYNAMIC MAP TEXT OVERLAYS & LABELS        -->
-        <!-- ========================================== -->
+        <!-- Labels -->
         <text x="300" y="35" class="map-text" style="font-size:12px; fill:#c8a94a; letter-spacing:1px;">DEFEND END</text>
         <text x="300" y="578" class="map-text" style="font-size:12px; fill:#c8a94a; letter-spacing:1px;">SHOOT END</text>
-
-        <!-- 300 Level Section Numbers Reference -->
         <text x="300" y="72" class="map-text">318</text>
         <text x="255" y="77" class="map-text">317</text>
         <text x="345" y="77" class="map-text">319</text>
-        <text x="210" y="90" class="map-text">316</text>
-        <text x="390" y="90" class="map-text">319</text>
-        <text x="160" y="115" class="map-text">315</text>
-        <text x="440" y="115" class="map-text">321</text>
-        
         <text x="300" y="538" class="map-text">301</text>
-        <text x="255" y="533" class="map-text">334</text>
-        <text x="345" y="533" class="map-text">302</text>
-        <text x="210" y="515" class="map-text">333</text>
-        <text x="390" y="515" class="map-text">303</text>
-
         <text x="75" y="303" class="map-text">308</text>
         <text x="525" y="303" class="map-text">325</text>
       </svg>
 
-      <!-- TOOLTIP -->
       <div id="tooltip">
         <div class="tip-name" id="tip-name"></div>
         <div class="tip-price" id="tip-price"></div>
       </div>
     </div>
-    
     <p class="map-note">* All prices shown are avg. per seat per game. All-inclusive spaces include food &amp; select beverages where noted. Prices subject to change. Does not include sales tax.</p>
   </div>
 
@@ -595,7 +552,6 @@
       <p>Average price per seat per game · Select a zone on the map or expand a tier below</p>
     </div>
 
-    <!-- Active Row Insight Selection Bar -->
     <div class="info-bar" id="info-bar">
       <div class="ib-name" id="ib-name"></div>
       <div class="ib-prices" id="ib-prices"></div>
@@ -630,7 +586,7 @@
       </div>
     </div>
 
-    <!-- 100 LEVEL BOWL METRICS -->
+    <!-- 100 LEVEL BOWL -->
     <button class="tier-btn open" onclick="toggleTier(this)">
       <span>100 Level <span class="tier-label-pill">Lower Bowl</span></span>
       <span class="chevron">▼</span>
@@ -728,7 +684,7 @@
       </div>
     </div>
 
-    <!-- 300 LEVEL UPPER BOWL METER -->
+    <!-- 300 LEVEL UPPER BOWL -->
     <button class="tier-btn" onclick="toggleTier(this)">
       <span>300 Level <span class="tier-label-pill">Upper Bowl</span></span>
       <span class="chevron">▼</span>
@@ -754,25 +710,15 @@
         <div class="row-price">$44</div>
         <div class="paw">🐾</div>
       </div>
-      <div class="price-row" data-zone="ugz-shoot-lower" onclick="selectRow(this)">
+      <div class="price-row" data-zone="ugz-shoot-upper" onclick="selectRow(this)">
         <div class="row-swatch-name"><div class="swatch" style="background:#bc1c24"></div><div class="row-name">Upper Goal Zone - Shoot 2x (Lower Rows)</div></div>
         <div class="row-price">$35</div>
         <div class="row-price gold">$47</div>
       </div>
-      <div class="price-row" data-zone="ugz-defend-lower" onclick="selectRow(this)">
+      <div class="price-row" data-zone="ugz-defend-upper" onclick="selectRow(this)">
         <div class="row-swatch-name"><div class="swatch" style="background:#bc1c24"></div><div class="row-name">Upper Goal Zone - Defend 2x (Lower Rows)</div></div>
         <div class="row-price">$35</div>
         <div class="row-price gold">$47</div>
-      </div>
-      <div class="price-row" data-zone="ugz-shoot-upper" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#bc1c24"></div><div class="row-name">Upper Goal Zone - Shoot 2x (Upper Rows)</div></div>
-        <div class="row-price">$31</div>
-        <div class="row-price gold">$42</div>
-      </div>
-      <div class="price-row" data-zone="ugz-defend-upper" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#bc1c24"></div><div class="row-name">Upper Goal Zone - Defend 2x (Upper Rows)</div></div>
-        <div class="row-price">$30</div>
-        <div class="row-price gold">$40</div>
       </div>
     </div>
 
@@ -786,7 +732,6 @@
 </div>
 
 <script>
-  // Lookup data containing values matching the layout structure
   const zoneData = {
     'glass-r1':           { name: 'Glass (Row 1) (All-Inclusive Club Access)', full: '$535', premier: 'Full Season Only' },
     'amerant-vault':      { name: 'Amerant Vault (Includes food & select beverages)', full: '$385', premier: 'Full Season Only' },
@@ -813,10 +758,8 @@
     'ucenter':            { name: 'Upper Center', full: '$55', premier: 'Full Season Only' },
     'usideline':          { name: 'Upper Sideline', full: '$45', premier: '$60' },
     'ugz-12':             { name: 'Upper Goal Zone (Rows 1 & 2)', full: '$44', premier: 'Full Season Only' },
-    'ugz-shoot-lower':    { name: 'Upper Goal Zone - Shoot 2x (Lower Rows)', full: '$35', premier: '$47' },
-    'ugz-defend-lower':   { name: 'Upper Goal Zone - Defend 2x (Lower Rows)', full: '$35', premier: '$47' },
-    'ugz-shoot-upper':    { name: 'Upper Goal Zone - Shoot 2x (Upper Rows)', full: '$31', premier: '$42' },
-    'ugz-defend-upper':   { name: 'Upper Goal Zone - Defend 2x (Upper Rows)', full: '$30', premier: '$40' }
+    'ugz-shoot-upper':    { name: 'Upper Goal Zone (Shoot 2x Rows)', full: '$35', premier: '$47' },
+    'ugz-defend-upper':   { name: 'Upper Goal Zone (Defend 2x Rows)', full: '$35', premier: '$47' }
   };
 
   function toggleTier(btn) {
@@ -845,7 +788,6 @@
     document.getElementById('info-bar').classList.add('show');
   }
 
-  // Interactive Hover Mapping Configurations
   const tooltip = document.getElementById('tooltip');
   document.querySelectorAll('.zone').forEach(zone => {
     zone.addEventListener('mouseenter', function(e) {
