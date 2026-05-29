@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>Florida Panthers 2026-27 Territory Memberships</title>
   <style>
@@ -13,7 +14,6 @@
       --navy-mid: #0A2A5A;
       --navy-light: #0E3570;
       --white: #FFFFFF;
-      --off-white: #F0EDE8;
       --panel-bg: #071830;
       --panel-border: rgba(200,169,74,0.25);
     }
@@ -74,11 +74,10 @@
     .main {
       display: flex;
       flex-direction: row;
-      gap: 0;
       min-height: calc(100vh - 95px);
     }
 
-    /* ── MAP SIDE ── */
+    /* ── MAP SIDE (IMAGE + SVG LAYER) ── */
     .map-side {
       flex: 1 1 60%;
       position: relative;
@@ -107,39 +106,41 @@
       max-width: 680px;
     }
 
-    #arena-svg {
+    /* Original Chart Asset Rendering Base */
+    .arena-base-img {
+      display: block;
       width: 100%;
       height: auto;
       filter: drop-shadow(0 10px 25px rgba(0,0,0,0.6));
     }
 
-    .zone {
-      cursor: pointer;
-      transition: opacity 0.15s, filter 0.15s;
-    }
-    .zone:hover { opacity: 0.88; filter: brightness(1.15) contrast(1.05); }
-    .zone.active { filter: brightness(1.35) drop-shadow(0 0 10px rgba(255,255,255,0.8)); opacity: 1 !important; }
-    
-    .map-text {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 8px;
-      fill: #ffffff;
-      text-anchor: middle;
-      pointer-events: none;
-    }
-    
-    .ice-text {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: 9px;
-      fill: #224477;
-      text-anchor: middle;
-      opacity: 0.45;
-      pointer-events: none;
+    /* Interactive Hitbox Overlay Overlay */
+    .interactive-svg-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
     }
 
-    /* tooltip */
+    .zone {
+      fill: rgba(255, 255, 255, 0);
+      stroke: transparent;
+      cursor: pointer;
+      transition: fill 0.15s, stroke 0.15s;
+    }
+    .zone:hover {
+      fill: rgba(200, 169, 74, 0.25);
+      stroke: var(--gold);
+      stroke-width: 1.5px;
+    }
+    .zone.active {
+      fill: rgba(200, 169, 74, 0.4);
+      stroke: #ffffff;
+      stroke-width: 2px;
+    }
+
+    /* Tooltip */
     #tooltip {
       position: absolute;
       background: #041022;
@@ -213,7 +214,7 @@
     }
     .col-headers .col-right { text-align: center; line-height: 1.2; }
 
-    /* accordion tier */
+    /* Accordion Structures */
     .tier-btn {
       width: 100%;
       background: var(--navy-light);
@@ -232,10 +233,7 @@
       justify-content: space-between;
     }
     .tier-btn:hover { background: #15468a; }
-    .tier-btn .chevron {
-      font-size: 12px;
-      transition: transform 0.2s;
-    }
+    .tier-btn .chevron { transition: transform 0.2s; font-size: 12px; }
     .tier-btn.open .chevron { transform: rotate(180deg); }
 
     .tier-label-pill {
@@ -246,14 +244,13 @@
       padding: 2px 6px;
       font-weight: 700;
       margin-left: 6px;
-      vertical-align: middle;
     }
     .tier-label-pill.all-inclusive { background: #145c32; }
 
     .tier-panel { display: none; }
     .tier-panel.open { display: block; }
 
-    /* row */
+    /* Rows */
     .price-row {
       display: grid;
       grid-template-columns: 1fr 75px 75px;
@@ -266,11 +263,7 @@
     .price-row:hover { background: rgba(200,169,74,0.08); }
     .price-row.active { background: rgba(200,169,74,0.18); }
 
-    .row-swatch-name {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+    .row-swatch-name { display: flex; align-items: center; gap: 10px; }
     .swatch {
       width: 14px;
       height: 14px;
@@ -278,19 +271,8 @@
       flex-shrink: 0;
       border: 1px solid rgba(255,255,255,0.3);
     }
-    .row-name {
-      font-size: 12.5px;
-      font-weight: 500;
-      line-height: 1.3;
-      color: rgba(255,255,255,0.95);
-    }
-    .row-price {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 14px;
-      text-align: center;
-      color: var(--white);
-    }
+    .row-name { font-size: 12.5px; font-weight: 500; line-height: 1.3; color: rgba(255,255,255,0.95); }
+    .row-price { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; text-align: center; }
     .row-price.gold { color: var(--gold); }
     .paw { color: var(--red); font-size: 13px; text-align: center; opacity: 0.85; }
 
@@ -302,17 +284,8 @@
       text-transform: uppercase;
       color: var(--gold);
       border-bottom: 1px solid var(--panel-border);
-      letter-spacing: 0.5px;
     }
 
-    .disclaimer {
-      padding: 16px;
-      font-size: 10px;
-      color: rgba(255,255,255,0.4);
-      line-height: 1.6;
-    }
-
-    /* info highlight bar */
     .info-bar {
       background: rgba(200,169,74,0.12);
       border-top: 3px solid var(--gold);
@@ -325,6 +298,8 @@
     .info-bar .ib-name { font-size: 16px; font-weight: 800; color: var(--gold); text-transform: uppercase; }
     .info-bar .ib-prices { font-size: 14px; color: #ffffff; margin-top: 4px; font-weight: 500; }
 
+    .disclaimer { padding: 16px; font-size: 10px; color: rgba(255,255,255,0.4); line-height: 1.6; }
+
     @media (max-width: 850px) {
       .main { flex-direction: column; }
       .pricing-side { flex: none; max-height: none; }
@@ -334,7 +309,6 @@
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="header">
   <div class="header-logo">
     <img src="https://upload.wikimedia.org/wikipedia/en/4/43/Florida_Panthers_2016_logo.svg" alt="Florida Panthers">
@@ -349,192 +323,33 @@
   </div>
 </div>
 
-<!-- MAIN CONTAINER -->
 <div class="main">
 
-  <!-- MAP PANEL -->
   <div class="map-side">
-    <div class="map-label">AMERANT BANK ARENA SEATING CHART</div>
+    <div class="map-label">Interactive Seating Map</div>
     <div class="map-container">
       
-      <!-- HIGH FIDELITY SVG BLUEPRINT -->
-      <svg id="arena-svg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="iceSurface" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#ffffff"/>
-            <stop offset="100%" stop-color="#edf6fc"/>
-          </radialGradient>
-        </defs>
-
-        <rect width="600" height="600" fill="none" />
-
-        <!-- ========================================== -->
-        <!--  300 LEVEL UPPER BOWL TIER (OUTER RING)  -->
-        <!-- ========================================== -->
-        <!-- Bottom End Upper Bowl (Shoot End) -->
-        <g class="zone" data-id="ugz-shoot-upper" fill="#bc1c24" stroke="#041e42" stroke-width="1.2">
-          <path d="M 230 550 A 255 255 0 0 1 110 500 L 155 440 A 175 175 0 0 0 240 475 Z" />
-          <path d="M 110 500 A 255 255 0 0 1 50 400 L 110 365 A 175 175 0 0 0 155 440 Z" />
-          <path d="M 230 550 A 255 255 0 0 0 370 550 L 360 475 A 175 175 0 0 1 240 475 Z" />
-          <path d="M 370 550 A 255 255 0 0 0 490 500 L 445 440 A 175 175 0 0 1 360 475 Z" />
-          <path d="M 490 500 A 255 255 0 0 0 550 400 L 490 365 A 175 175 0 0 1 445 440 Z" />
-        </g>
+      <img src="Seating Chart.png" class="arena-base-img" alt="Panthers Seating Chart Artwork">
+      
+      <svg class="interactive-svg-overlay" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
         
-        <!-- Top End Upper Bowl (Defend End) -->
-        <g class="zone" data-id="ugz-defend-upper" fill="#bc1c24" stroke="#041e42" stroke-width="1.2">
-          <path d="M 230 50 A 255 255 0 0 0 110 100 L 155 160 A 175 175 0 0 1 240 125 Z" />
-          <path d="M 110 100 A 255 255 0 0 0 50 200 L 110 235 A 175 175 0 0 1 155 160 Z" />
-          <path d="M 230 50 A 255 255 0 0 1 370 50 L 360 125 A 175 175 0 0 0 240 125 Z" />
-          <path d="M 370 50 A 255 255 0 0 1 490 100 L 445 160 A 175 175 0 0 0 360 125 Z" />
-          <path d="M 490 100 A 255 255 0 0 1 550 200 L 490 235 A 175 175 0 0 0 445 160 Z" />
-        </g>
+        <path class="zone" data-id="ugz-defend-upper" d="M 120,60 Q 300,-10 480,60 L 430,130 Q 300,75 170,130 Z" />
+        <path class="zone" data-id="ucenter" d="M 30,180 Q 10,300 30,420 L 110,380 Q 95,300 110,220 Z" />
+        <path class="zone" data-id="usideline" d="M 570,180 Q 590,300 570,420 L 490,380 Q 505,300 490,220 Z" />
+        <path class="zone" data-id="ugz-shoot-upper" d="M 120,540 Q 300,610 480,540 L 430,470 Q 300,525 170,470 Z" />
 
-        <!-- Upper Sidelines -->
-        <g class="zone" data-id="usideline" fill="#e66c24" stroke="#041e42" stroke-width="1.2">
-          <path d="M 550 200 A 255 255 0 0 1 565 260 L 495 260 A 175 175 0 0 0 490 235 Z" />
-          <path d="M 565 260 A 255 255 0 0 1 565 340 L 495 340 A 175 175 0 0 0 495 260 Z" />
-          <path d="M 565 340 A 255 255 0 0 1 550 400 L 490 365 A 175 175 0 0 0 495 340 Z" />
-          <path d="M 50 200 A 255 255 0 0 0 35 260 L 105 260 A 175 175 0 0 1 110 235 Z" />
-          <path d="M 35 260 A 255 255 0 0 0 35 340 L 105 340 A 175 175 0 0 1 105 260 Z" />
-          <path d="M 35 340 A 255 255 0 0 0 50 400 L 110 365 A 175 175 0 0 1 105 340 Z" />
-        </g>
+        <path class="zone" data-id="club-center" d="M 115,220 Q 100,300 115,380 L 165,365 Q 150,300 165,235 Z" />
+        <path class="zone" data-id="club-gz" d="M 175,135 Q 300,85 425,135 L 395,190 Q 300,150 205,190 Z" />
+        <path class="zone" data-id="club-gz-r1" d="M 175,465 Q 300,515 425,465 L 395,410 Q 300,450 205,410 Z" />
 
-        <!-- Upper Centers -->
-        <g class="zone" data-id="ucenter" fill="#246ca4" stroke="#041e42" stroke-width="1.2">
-          <path d="M 35 260 L 35 290 L 105 290 L 105 260 Z" />
-          <path d="M 35 290 L 35 340 L 105 340 L 105 290 Z" />
-          <path d="M 565 260 L 565 290 L 495 290 L 495 260 Z" />
-          <path d="M 565 290 L 565 340 L 495 340 L 495 290 Z" />
-        </g>
+        <path class="zone" data-id="center-ice-premier" d="M 175,245 L 225,245 L 225,355 L 175,355 Z" />
+        <path class="zone" data-id="center-ice" d="M 375,245 L 425,245 L 425,355 L 375,355 Z" />
+        <path class="zone" data-id="lgz-shoot" d="M 210,400 Q 300,440 390,400 L 360,350 Q 300,380 240,350 Z" />
+        <path class="zone" data-id="lgz-defend" d="M 210,200 Q 300,160 390,200 L 360,250 Q 300,220 240,250 Z" />
 
-        <!-- Rows 1&2 Inner Upper Ring Splits -->
-        <g class="zone" data-id="ucs-12" fill="#542454" stroke="#041e42" stroke-width="1.2">
-          <path d="M 105 235 A 175 175 0 0 1 105 365 L 120 350 A 150 150 0 0 0 120 250 Z" />
-          <path d="M 495 235 A 175 175 0 0 0 495 365 L 480 350 A 150 150 0 0 1 480 250 Z" />
-        </g>
-        <g class="zone" data-id="ugz-12" fill="#245c34" stroke="#041e42" stroke-width="1.2">
-          <path d="M 120 250 A 150 150 0 0 0 480 250 L 465 235 A 175 175 0 0 1 135 235 Z" />
-          <path d="M 120 350 A 150 150 0 0 1 480 350 L 465 365 A 175 175 0 0 0 135 365 Z" />
-        </g>
-
-        <!-- ========================================== -->
-        <!--  CLUB LEVEL MIDDLE TIER RING              -->
-        <!-- ========================================== -->
-        <g class="zone" data-id="club-gz" fill="#e4841c" stroke="#041e42" stroke-width="1">
-          <path d="M 140 180 A 150 150 0 0 1 460 180 L 440 205 A 120 120 0 0 0 160 205 Z" />
-          <path d="M 140 420 A 150 150 0 0 0 460 420 L 440 395 A 120 120 0 0 1 160 395 Z" />
-        </g>
-        <g class="zone" data-id="club-gz-r1" fill="#fca41c" stroke="#041e42" stroke-width="1">
-          <path d="M 160 205 A 120 120 0 0 0 440 205 L 430 215 A 110 110 0 0 1 170 215 Z" />
-          <path d="M 160 395 A 120 120 0 0 1 440 395 L 430 385 Aut O 110 110 0 0 0 170 385 Z" />
-        </g>
-        <g class="zone" data-id="club-center" fill="#7c848c" stroke="#041e42" stroke-width="1">
-          <path d="M 140 180 A 150 150 0 0 1 140 420 L 165 395 A 120 120 0 0 0 165 205 Z" />
-          <path d="M 460 180 A 150 150 0 0 0 460 420 L 435 395 A 120 120 0 0 1 435 205 Z" />
-        </g>
-
-        <!-- ========================================== -->
-        <!--  100 LEVEL LOWER BOWL TIER                -->
-        <!-- ========================================== -->
-        <!-- Shoot Ends -->
-        <g class="zone" data-id="lgz-shoot" fill="#0c5474" stroke="#041e42" stroke-width="0.8">
-          <path d="M 180 430 A 100 100 0 0 0 420 430 L 400 405 A 80 80 0 0 1 200 405 Z" />
-        </g>
-        <g class="zone" data-id="lgz-select-shoot" fill="#3c94bc" stroke="#041e42" stroke-width="0.8">
-          <path d="M 200 405 A 80 80 0 0 1 400 405 L 385 385 A 65 65 0 0 0 215 385 Z" />
-        </g>
-        <g class="zone" data-id="lgz-premier-shoot" fill="#7ccce4" stroke="#041e42" stroke-width="0.8">
-          <path d="M 215 385 A 65 65 0 0 1 385 385 L 375 370 A 50 50 0 0 0 225 370 Z" />
-        </g>
-
-        <!-- Defend Ends -->
-        <g class="zone" data-id="lgz-defend" fill="#4c2c74" stroke="#041e42" stroke-width="0.8">
-          <path d="M 180 170 A 100 100 0 0 1 420 170 L 400 195 A 80 80 0 0 0 200 195 Z" />
-        </g>
-        <g class="zone" data-id="lgz-select-defend" fill="#6c4cbc" stroke="#041e42" stroke-width="0.8">
-          <path d="M 200 195 A 80 80 0 0 0 400 195 L 385 215 A 65 65 0 0 1 215 215 Z" />
-        </g>
-        <g class="zone" data-id="lgz-premier-defend" fill="#9c7cc4" stroke="#041e42" stroke-width="0.8">
-          <path d="M 215 215 A 65 65 0 0 0 385 215 L 375 230 A 50 50 0 0 1 225 230 Z" />
-        </g>
-
-        <!-- Sidelines Rings -->
-        <g class="zone" data-id="sideline-defend" fill="#543414" stroke="#041e42" stroke-width="0.8">
-          <path d="M 180 170 A 100 100 0 0 0 180 270 L 205 270 A 80 80 0 0 1 200 195 Z" />
-        </g>
-        <g class="zone" data-id="sideline-premier-defend" fill="#7c5c2c" stroke="#041e42" stroke-width="0.8">
-          <path d="M 205 170 A 80 80 0 0 0 205 270 L 220 270 A 65 65 0 0 1 215 195 Z" />
-        </g>
-        <g class="zone" data-id="sideline-shoot" fill="#2c5c14" stroke="#041e42" stroke-width="0.8">
-          <path d="M 180 270 A 100 100 0 0 0 180 430 L 200 405 A 80 80 0 0 1 205 270 Z" />
-        </g>
-        <g class="zone" data-id="sideline-premier-shoot" fill="#4c7c2c" stroke="#041e42" stroke-width="0.8">
-          <path d="M 205 270 A 80 80 0 0 0 200 405 L 215 385 A 65 65 0 0 1 220 270 Z" />
-        </g>
-
-        <!-- Blue Line Splits -->
-        <g class="zone" data-id="blueline-shoot" fill="#245494" stroke="#041e42" stroke-width="0.8">
-          <path d="M 420 170 A 100 100 0 0 1 420 270 L 395 270 A 80 80 0 0 0 400 195 Z" />
-        </g>
-        <g class="zone" data-id="blueline-premier-shoot" fill="#4c84bc" stroke="#041e42" stroke-width="0.8">
-          <path d="M 395 170 A 80 80 0 0 1 395 270 L 380 270 A 65 65 0 0 0 385 195 Z" />
-        </g>
-        <g class="zone" data-id="blueline-shoot" fill="#3c4cbc" stroke="#041e42" stroke-width="0.8">
-          <path d="M 420 270 A 100 100 0 0 1 420 430 L 400 405 A 80 80 0 0 0 395 270 Z" />
-        </g>
-
-        <!-- Center Ice Configurations -->
-        <g class="zone" data-id="center-ice" fill="#a44ca4" stroke="#041e42" stroke-width="0.8">
-          <rect x="220" y="230" width="30" height="140" />
-          <rect x="350" y="230" width="30" height="140" />
-        </g>
-        <g class="zone" data-id="center-ice-premier" fill="#e46ce4" stroke="#041e42" stroke-width="0.8">
-          <rect x="250" y="230" width="25" height="140" />
-          <rect x="325" y="230" width="25" height="140" />
-        </g>
-
-        <!-- Glass Row 2 -->
-        <g class="zone" data-id="glass-r2" fill="#dc2424" stroke="#041e42" stroke-width="0.8">
-          <path d="M 230 240 A 45 45 0 0 0 370 240 L 370 245 A 40 40 0 0 1 230 245 Z" />
-          <path d="M 230 360 A 45 45 0 0 1 370 360 L 370 355 A 40 40 0 0 0 230 355 Z" />
-        </g>
-
-        <!-- Premium Club Platforms -->
-        <g class="zone" data-id="corona-beach" fill="#cca43c" stroke="#ffffff" stroke-width="0.8">
-          <rect x="225" y="245" width="150" height="12" />
-          <rect x="225" y="343" width="150" height="12" />
-        </g>
-        <g class="zone" data-id="amerant-vault" fill="#acacac" stroke="#ffffff" stroke-width="0.8">
-          <rect x="225" y="257" width="40" height="15" />
-          <rect x="335" y="257" width="40" height="15" />
-          <rect x="225" y="328" width="40" height="15" />
-          <rect x="335" y="328" width="40" height="15" />
-        </g>
-        <g class="zone" data-id="glass-r1" fill="#bc0c24" stroke="#ffffff" stroke-width="0.8">
-          <rect x="225" y="272" width="150" height="4" />
-          <rect x="225" y="324" width="150" height="4" />
-        </g>
-
-        <!-- Central Arena Core Rink Layout -->
-        <g id="ice-rink">
-          <rect x="235" y="280" width="130" height="40" rx="12" ry="12" fill="url(#iceSurface)" stroke="#a4dcff" stroke-width="1.5" />
-          <line x1="300" y1="280" x2="300" y2="320" stroke="#dc2424" stroke-width="1" />
-          <circle cx="300" cy="300" r="8" fill="none" stroke="#a4dcff" stroke-width="1" />
-          <line x1="265" y1="280" x2="265" y2="320" stroke="#244cbc" stroke-width="1.2" />
-          <line x1="335" y1="280" x2="335" y2="320" stroke="#244cbc" stroke-width="1.2" />
-          <text x="250" y="297" class="ice-text" transform="rotate(-90 250 297)">PANTHERS DEFEND 2X</text>
-          <text x="350" y="297" class="ice-text" transform="rotate(90 350 297)">PANTHERS SHOOT 2X</text>
-        </g>
-
-        <!-- Labels -->
-        <text x="300" y="35" class="map-text" style="font-size:12px; fill:#c8a94a; letter-spacing:1px;">DEFEND END</text>
-        <text x="300" y="578" class="map-text" style="font-size:12px; fill:#c8a94a; letter-spacing:1px;">SHOOT END</text>
-        <text x="300" y="72" class="map-text">318</text>
-        <text x="255" y="77" class="map-text">317</text>
-        <text x="345" y="77" class="map-text">319</text>
-        <text x="300" y="538" class="map-text">301</text>
-        <text x="75" y="303" class="map-text">308</text>
-        <text x="525" y="303" class="map-text">325</text>
+        <rect class="zone" data-id="glass-r1" x="245" y="270" width="110" height="15" />
+        <rect class="zone" data-id="corona-beach" x="245" y="315" width="110" height="15" />
+        <rect class="zone" data-id="amerant-vault" x="235" y="285" width="10" height="30" />
       </svg>
 
       <div id="tooltip">
@@ -545,7 +360,6 @@
     <p class="map-note">* All prices shown are avg. per seat per game. All-inclusive spaces include food &amp; select beverages where noted. Prices subject to change. Does not include sales tax.</p>
   </div>
 
-  <!-- PRICING PANEL -->
   <div class="pricing-side">
     <div class="pricing-header">
       <h2>2026–27 New Member &amp; Add-On Pricing</h2>
@@ -563,7 +377,6 @@
       <div class="col-right">SeatGeek<br>Premier<br><span style="font-weight:400; opacity:0.75;">(25 Gms.)</span></div>
     </div>
 
-    <!-- ALL-INCLUSIVE ACCOMMODATIONS -->
     <button class="tier-btn open" onclick="toggleTier(this)">
       <span>All-Inclusive Spaces <span class="tier-label-pill all-inclusive">Incl. Food &amp; Bev</span></span>
       <span class="chevron">▼</span>
@@ -586,17 +399,11 @@
       </div>
     </div>
 
-    <!-- 100 LEVEL BOWL -->
     <button class="tier-btn open" onclick="toggleTier(this)">
       <span>100 Level <span class="tier-label-pill">Lower Bowl</span></span>
       <span class="chevron">▼</span>
     </button>
     <div class="tier-panel open">
-      <div class="price-row" data-zone="glass-r2" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#dc2424"></div><div class="row-name">Glass (Row 2)</div></div>
-        <div class="row-price">$210</div>
-        <div class="paw">🐾</div>
-      </div>
       <div class="price-row" data-zone="center-ice-premier" onclick="selectRow(this)">
         <div class="row-swatch-name"><div class="swatch" style="background:#e46ce4"></div><div class="row-name">Center Ice Premier (Lower Rows)</div></div>
         <div class="row-price">$210</div>
@@ -607,63 +414,13 @@
         <div class="row-price">$199</div>
         <div class="paw">🐾</div>
       </div>
-      <div class="price-row" data-zone="blueline-premier-shoot" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#4c84bc"></div><div class="row-name">Blue Line Premier (Lower Rows)</div></div>
-        <div class="row-price">$177</div>
-        <div class="paw">🐾</div>
-      </div>
-      <div class="price-row" data-zone="blueline-shoot" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#3c4cbc"></div><div class="row-name">Blue Line (Upper Rows)</div></div>
-        <div class="row-price">$155</div>
-        <div class="paw">🐾</div>
-      </div>
-      <div class="price-row" data-zone="sideline-premier-shoot" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#4c7c2c"></div><div class="row-name">Sideline Premier - Shoot 2x (Lower Rows)</div></div>
-        <div class="row-price">$150</div>
-        <div class="paw">🐾</div>
-      </div>
-      <div class="price-row" data-zone="sideline-shoot" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#2c5c14"></div><div class="row-name">Sideline - Shoot 2x (Upper Rows)</div></div>
-        <div class="row-price">$136</div>
-        <div class="paw">🐾</div>
-      </div>
-      <div class="price-row" data-zone="sideline-premier-defend" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#7c5c2c"></div><div class="row-name">Sideline Premier - Defend 2x (Lower Rows)</div></div>
-        <div class="row-price">$140</div>
-        <div class="paw">🐾</div>
-      </div>
-      <div class="price-row" data-zone="sideline-defend" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#543414"></div><div class="row-name">Sideline - Defend 2x (Upper Rows)</div></div>
-        <div class="row-price">$126</div>
-        <div class="paw">🐾</div>
-      </div>
-      <div class="price-row" data-zone="lgz-premier-shoot" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#7ccce4"></div><div class="row-name">Lower Goal Zone Premier - Shoot 2x (Lower Rows)</div></div>
-        <div class="row-price">$122</div>
-        <div class="paw">🐾</div>
-      </div>
-      <div class="price-row" data-zone="lgz-select-shoot" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#3c94bc"></div><div class="row-name">Lower Goal Zone Select - Shoot 2x (Middle Rows)</div></div>
-        <div class="row-price">$95</div>
-        <div class="paw">🐾</div>
-      </div>
       <div class="price-row" data-zone="lgz-shoot" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#0c5474"></div><div class="row-name">Lower Goal Zone - Shoot 2x (Upper Rows)</div></div>
+        <div class="row-swatch-name"><div class="swatch" style="background:#0c5474"></div><div class="row-name">Lower Goal Zone - Shoot 2x</div></div>
         <div class="row-price">$85</div>
         <div class="paw">🐾</div>
       </div>
-      <div class="price-row" data-zone="lgz-premier-defend" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#9c7cc4"></div><div class="row-name">Lower Goal Zone Premier - Defend 2x (Lower Rows)</div></div>
-        <div class="row-price">$113</div>
-        <div class="paw">🐾</div>
-      </div>
-      <div class="price-row" data-zone="lgz-select-defend" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#6c4cbc"></div><div class="row-name">Lower Goal Zone Select - Defend 2x (Middle Rows)</div></div>
-        <div class="row-price">$88</div>
-        <div class="paw">🐾</div>
-      </div>
       <div class="price-row" data-zone="lgz-defend" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#4c2c74"></div><div class="row-name">Lower Goal Zone - Defend 2x (Upper Rows)</div></div>
+        <div class="row-swatch-name"><div class="swatch" style="background:#4c2c74"></div><div class="row-name">Lower Goal Zone - Defend 2x</div></div>
         <div class="row-price">$79</div>
         <div class="paw">🐾</div>
       </div>
@@ -684,17 +441,11 @@
       </div>
     </div>
 
-    <!-- 300 LEVEL UPPER BOWL -->
     <button class="tier-btn" onclick="toggleTier(this)">
       <span>300 Level <span class="tier-label-pill">Upper Bowl</span></span>
       <span class="chevron">▼</span>
     </button>
     <div class="tier-panel">
-      <div class="price-row" data-zone="ucs-12" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#542454"></div><div class="row-name">Upper Center/Sideline (Rows 1 &amp; 2)</div></div>
-        <div class="row-price">$70</div>
-        <div class="paw">🐾</div>
-      </div>
       <div class="price-row" data-zone="ucenter" onclick="selectRow(this)">
         <div class="row-swatch-name"><div class="swatch" style="background:#246ca4"></div><div class="row-name">Upper Center</div></div>
         <div class="row-price">$55</div>
@@ -705,18 +456,13 @@
         <div class="row-price">$45</div>
         <div class="row-price gold">$60</div>
       </div>
-      <div class="price-row" data-zone="ugz-12" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#245c34"></div><div class="row-name">Upper Goal Zone (Rows 1 &amp; 2)</div></div>
-        <div class="row-price">$44</div>
-        <div class="paw">🐾</div>
-      </div>
       <div class="price-row" data-zone="ugz-shoot-upper" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#bc1c24"></div><div class="row-name">Upper Goal Zone - Shoot 2x (Lower Rows)</div></div>
+        <div class="row-swatch-name"><div class="swatch" style="background:#bc1c24"></div><div class="row-name">Upper Goal Zone - Shoot 2x</div></div>
         <div class="row-price">$35</div>
         <div class="row-price gold">$47</div>
       </div>
       <div class="price-row" data-zone="ugz-defend-upper" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#bc1c24"></div><div class="row-name">Upper Goal Zone - Defend 2x (Lower Rows)</div></div>
+        <div class="row-swatch-name"><div class="swatch" style="background:#bc1c24"></div><div class="row-name">Upper Goal Zone - Defend 2x</div></div>
         <div class="row-price">$35</div>
         <div class="row-price gold">$47</div>
       </div>
@@ -736,30 +482,17 @@
     'glass-r1':           { name: 'Glass (Row 1) (All-Inclusive Club Access)', full: '$535', premier: 'Full Season Only' },
     'amerant-vault':      { name: 'Amerant Vault (Includes food & select beverages)', full: '$385', premier: 'Full Season Only' },
     'corona-beach':       { name: 'Corona Beach House (Includes food & select beverages)', full: '$210', premier: '$284' },
-    'glass-r2':           { name: 'Glass (Row 2)', full: '$210', premier: 'Full Season Only' },
     'center-ice-premier': { name: 'Center Ice Premier (Lower Rows)', full: '$210', premier: 'Full Season Only' },
     'center-ice':         { name: 'Center Ice (Upper Rows)', full: '$199', premier: 'Full Season Only' },
-    'blueline-premier-shoot': { name: 'Blue Line Premier (Lower Rows)', full: '$177', premier: 'Full Season Only' },
-    'blueline-shoot':     { name: 'Blue Line (Upper Rows)', full: '$155', premier: 'Full Season Only' },
-    'sideline-premier-shoot': { name: 'Sideline Premier - Shoot 2x (Lower Rows)', full: '$150', premier: 'Full Season Only' },
-    'sideline-shoot':     { name: 'Sideline - Shoot 2x (Upper Rows)', full: '$136', premier: 'Full Season Only' },
-    'sideline-premier-defend': { name: 'Sideline Premier - Defend 2x (Lower Rows)', full: '$140', premier: 'Full Season Only' },
-    'sideline-defend':    { name: 'Sideline - Defend 2x (Upper Rows)', full: '$126', premier: 'Full Season Only' },
-    'lgz-premier-shoot':  { name: 'Lower Goal Zone Premier - Shoot 2x (Lower Rows)', full: '$122', premier: 'Full Season Only' },
-    'lgz-select-shoot':   { name: 'Lower Goal Zone Select - Shoot 2x (Middle Rows)', full: '$95', premier: 'Full Season Only' },
-    'lgz-shoot':          { name: 'Lower Goal Zone - Shoot 2x (Upper Rows)', full: '$85', premier: 'Full Season Only' },
-    'lgz-premier-defend': { name: 'Lower Goal Zone Premier - Defend 2x (Lower Rows)', full: '$113', premier: 'Full Season Only' },
-    'lgz-select-defend':  { name: 'Lower Goal Zone Select - Defend 2x (Middle Rows)', full: '$88', premier: 'Full Season Only' },
-    'lgz-defend':         { name: 'Lower Goal Zone - Defend 2x (Upper Rows)', full: '$79', premier: 'Full Season Only' },
+    'lgz-shoot':          { name: 'Lower Goal Zone - Shoot 2x', full: '$85', premier: 'Full Season Only' },
+    'lgz-defend':         { name: 'Lower Goal Zone - Defend 2x', full: '$79', premier: 'Full Season Only' },
     'club-center':        { name: 'Club Center', full: '$165', premier: 'Full Season Only' },
     'club-gz-r1':         { name: 'Club Goal Zone (Row 1)', full: '$150', premier: 'Full Season Only' },
     'club-gz':            { name: 'Club Goal Zone', full: '$130', premier: '$168' },
-    'ucs-12':             { name: 'Upper Center/Sideline (Rows 1 & 2)', full: '$70', premier: 'Full Season Only' },
     'ucenter':            { name: 'Upper Center', full: '$55', premier: 'Full Season Only' },
     'usideline':          { name: 'Upper Sideline', full: '$45', premier: '$60' },
-    'ugz-12':             { name: 'Upper Goal Zone (Rows 1 & 2)', full: '$44', premier: 'Full Season Only' },
-    'ugz-shoot-upper':    { name: 'Upper Goal Zone (Shoot 2x Rows)', full: '$35', premier: '$47' },
-    'ugz-defend-upper':   { name: 'Upper Goal Zone (Defend 2x Rows)', full: '$35', premier: '$47' }
+    'ugz-shoot-upper':    { name: 'Upper Goal Zone - Shoot 2x', full: '$35', premier: '$47' },
+    'ugz-defend-upper':   { name: 'Upper Goal Zone - Defend 2x', full: '$35', premier: '$47' }
   };
 
   function toggleTier(btn) {
@@ -790,7 +523,7 @@
 
   const tooltip = document.getElementById('tooltip');
   document.querySelectorAll('.zone').forEach(zone => {
-    zone.addEventListener('mouseenter', function(e) {
+    zone.addEventListener('mouseenter', function() {
       const id = this.dataset.id;
       const d = zoneData[id];
       if (!d) return;
