@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>Florida Panthers 2026-27 Territory Memberships</title>
   <style>
@@ -14,6 +13,7 @@
       --navy-mid: #0A2A5A;
       --navy-light: #0E3570;
       --white: #FFFFFF;
+      --off-white: #F0EDE8;
       --panel-bg: #071830;
       --panel-border: rgba(200,169,74,0.25);
     }
@@ -74,10 +74,11 @@
     .main {
       display: flex;
       flex-direction: row;
+      gap: 0;
       min-height: calc(100vh - 95px);
     }
 
-    /* ── MAP SIDE (IMAGE + SVG LAYER) ── */
+    /* ── MAP SIDE ── */
     .map-side {
       flex: 1 1 60%;
       position: relative;
@@ -86,18 +87,19 @@
       align-items: center;
       justify-content: center;
       padding: 24px 20px 16px;
-      background: radial-gradient(ellipse at center, #163666 0%, #030d1a 100%);
+      background: radial-gradient(ellipse at center, #0e2a5a 0%, #041020 100%);
       border-right: 2px solid var(--panel-border);
     }
 
     .map-label {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 800;
-      font-size: 14px;
-      letter-spacing: 2px;
+      font-size: 13px;
+      letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--gold);
       margin-bottom: 12px;
+      opacity: 0.85;
     }
 
     .map-container {
@@ -106,65 +108,43 @@
       max-width: 680px;
     }
 
-    /* Original Chart Asset Rendering Base */
-    .arena-base-img {
-      display: block;
+    #arena-svg {
       width: 100%;
       height: auto;
-      filter: drop-shadow(0 10px 25px rgba(0,0,0,0.6));
-    }
-
-    /* Interactive Hitbox Overlay Overlay */
-    .interactive-svg-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6));
     }
 
     .zone {
-      fill: rgba(255, 255, 255, 0);
-      stroke: transparent;
       cursor: pointer;
-      transition: fill 0.15s, stroke 0.15s;
+      opacity: 0.85;
+      transition: opacity 0.15s, filter 0.15s;
     }
-    .zone:hover {
-      fill: rgba(200, 169, 74, 0.25);
-      stroke: var(--gold);
-      stroke-width: 1.5px;
+    .zone:hover { 
+      opacity: 1; 
+      filter: brightness(1.25) contrast(1.1); 
     }
-    .zone.active {
-      fill: rgba(200, 169, 74, 0.4);
-      stroke: #ffffff;
-      stroke-width: 2px;
+    .zone.active { 
+      opacity: 1;
+      filter: brightness(1.4) saturate(1.2);
+      stroke: #fff !important;
+      stroke-width: 2.5px !important;
     }
 
-    /* Tooltip */
+    /* ── TOOLTIP ── */
     #tooltip {
       position: absolute;
-      background: #041022;
-      border: 1.5px solid var(--gold);
+      background: #04142c;
+      border: 1px solid var(--gold);
       border-radius: 4px;
-      padding: 8px 12px;
+      padding: 10px 14px;
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 13px;
       pointer-events: none;
       display: none;
       z-index: 100;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
-    #tooltip .tip-name { color: var(--gold); font-size: 14px; font-weight: 800; text-transform: uppercase; }
-    #tooltip .tip-price { color: #fff; font-size: 13px; margin-top: 3px; font-weight: 600; }
-
-    .map-note {
-      margin-top: 14px;
-      font-size: 11px;
-      color: rgba(255,255,255,0.5);
-      text-align: center;
-      max-width: 580px;
-      line-height: 1.4;
-    }
+    #tooltip .tip-name { color: var(--gold); font-size: 15px; font-weight: 800; text-transform: uppercase; }
+    #tooltip .tip-price { color: #fff; font-size: 13px; margin-top: 3px; }
 
     /* ── PRICING PANEL ── */
     .pricing-side {
@@ -187,34 +167,27 @@
     .pricing-header h2 {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 900;
-      font-size: 21px;
+      font-size: 22px;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
       color: var(--gold);
-    }
-    .pricing-header p {
-      font-size: 11px;
-      color: rgba(255,255,255,0.6);
-      margin-top: 4px;
     }
 
     .col-headers {
       display: grid;
       grid-template-columns: 1fr 75px 75px;
-      gap: 6px;
-      padding: 10px 16px;
-      background: rgba(200,169,74,0.15);
+      gap: 4px;
+      padding: 8px 16px;
+      background: rgba(200,169,74,0.12);
       border-bottom: 1px solid var(--panel-border);
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
       color: var(--gold);
     }
-    .col-headers .col-right { text-align: center; line-height: 1.2; }
+    .col-headers .col-right { text-align: center; }
 
-    /* Accordion Structures */
     .tier-btn {
       width: 100%;
       background: var(--navy-light);
@@ -232,78 +205,43 @@
       align-items: center;
       justify-content: space-between;
     }
-    .tier-btn:hover { background: #15468a; }
-    .tier-btn .chevron { transition: transform 0.2s; font-size: 12px; }
+    .tier-btn:hover { background: #144488; }
+    .tier-btn .chevron { transition: transform 0.2s; font-size: 11px; }
     .tier-btn.open .chevron { transform: rotate(180deg); }
-
-    .tier-label-pill {
-      font-size: 10px;
-      background: var(--red);
-      color: #fff;
-      border-radius: 2px;
-      padding: 2px 6px;
-      font-weight: 700;
-      margin-left: 6px;
-    }
-    .tier-label-pill.all-inclusive { background: #145c32; }
 
     .tier-panel { display: none; }
     .tier-panel.open { display: block; }
 
-    /* Rows */
     .price-row {
       display: grid;
       grid-template-columns: 1fr 75px 75px;
-      gap: 6px;
+      gap: 4px;
       align-items: center;
-      padding: 9px 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 8px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
       cursor: pointer;
     }
-    .price-row:hover { background: rgba(200,169,74,0.08); }
-    .price-row.active { background: rgba(200,169,74,0.18); }
+    .price-row:hover { background: rgba(200,169,74,0.06); }
+    .price-row.active { background: rgba(200,169,74,0.14); }
 
-    .row-swatch-name { display: flex; align-items: center; gap: 10px; }
-    .swatch {
-      width: 14px;
-      height: 14px;
-      border-radius: 2px;
-      flex-shrink: 0;
-      border: 1px solid rgba(255,255,255,0.3);
-    }
-    .row-name { font-size: 12.5px; font-weight: 500; line-height: 1.3; color: rgba(255,255,255,0.95); }
+    .row-swatch-name { display: flex; align-items: center; gap: 8px; }
+    .swatch { width: 14px; height: 14px; border-radius: 2px; border: 1px solid rgba(255,255,255,0.3); }
+    .row-name { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.95); }
     .row-price { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; text-align: center; }
-    .row-price.gold { color: var(--gold); }
-    .paw { color: var(--red); font-size: 13px; text-align: center; opacity: 0.85; }
-
-    .suite-row {
-      padding: 12px 16px;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 14px;
-      text-transform: uppercase;
-      color: var(--gold);
-      border-bottom: 1px solid var(--panel-border);
-    }
 
     .info-bar {
-      background: rgba(200,169,74,0.12);
-      border-top: 3px solid var(--gold);
-      border-bottom: 1px solid var(--panel-border);
+      background: rgba(200,169,74,0.1);
+      border-top: 2px solid var(--gold);
       padding: 12px 16px;
-      font-family: 'Barlow Condensed', sans-serif;
       display: none;
     }
     .info-bar.show { display: block; }
     .info-bar .ib-name { font-size: 16px; font-weight: 800; color: var(--gold); text-transform: uppercase; }
-    .info-bar .ib-prices { font-size: 14px; color: #ffffff; margin-top: 4px; font-weight: 500; }
+    .info-bar .ib-prices { font-size: 13px; color: #fff; margin-top: 2px; }
 
-    .disclaimer { padding: 16px; font-size: 10px; color: rgba(255,255,255,0.4); line-height: 1.6; }
-
-    @media (max-width: 850px) {
+    @media (max-width: 900px) {
       .main { flex-direction: column; }
       .pricing-side { flex: none; max-height: none; }
-      .map-side { border-right: none; border-bottom: 2px solid var(--panel-border); }
     }
   </style>
 </head>
@@ -313,252 +251,347 @@
   <div class="header-logo">
     <img src="https://upload.wikimedia.org/wikipedia/en/4/43/Florida_Panthers_2016_logo.svg" alt="Florida Panthers">
     <div class="header-title">
-      <span>2026 - 2027</span>
+      <span>2026 / 2027</span>
       Territory Memberships
     </div>
   </div>
-  <div class="header-contact">
-    954-835-PUCK<br>
-    <a href="https://floridapanthers.com/memberships" target="_blank">FloridaPanthers.com/Memberships</a>
-  </div>
+  <div class="header-contact">954-835-PUCK<br><a href="#">FloridaPanthers.com/Memberships</a></div>
 </div>
 
 <div class="main">
-
   <div class="map-side">
-    <div class="map-label">Interactive Seating Map</div>
+    <div class="map-label">Interactive Pricing Map (Click Sections to View Details)</div>
     <div class="map-container">
-      
-      <img src="Seating Chart.png" class="arena-base-img" alt="Panthers Seating Chart Artwork">
-      
-      <svg class="interactive-svg-overlay" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-        
-        <path class="zone" data-id="ugz-defend-upper" d="M 120,60 Q 300,-10 480,60 L 430,130 Q 300,75 170,130 Z" />
-        <path class="zone" data-id="ucenter" d="M 30,180 Q 10,300 30,420 L 110,380 Q 95,300 110,220 Z" />
-        <path class="zone" data-id="usideline" d="M 570,180 Q 590,300 570,420 L 490,380 Q 505,300 490,220 Z" />
-        <path class="zone" data-id="ugz-shoot-upper" d="M 120,540 Q 300,610 480,540 L 430,470 Q 300,525 170,470 Z" />
+      <svg id="arena-svg" viewBox="0 0 900 660" xmlns="http://www.w3.org/2000/svg">
+        <rect x="330" y="250" width="240" height="160" rx="45" fill="#f2f9ff" stroke="#a2cddd" stroke-width="3"/>
+        <line x1="450" y1="250" x2="450" y2="410" stroke="#ff4d4d" stroke-width="2"/>
+        <circle cx="450" cy="330" r="30" fill="none" stroke="#ff4d4d" stroke-width="1.5"/>
+        <text x="385" y="335" font-family="'Barlow Condensed'" font-weight="800" font-size="11" fill="#c0d5e5" opacity="0.7">DEFEND 2X</text>
+        <text x="475" y="335" font-family="'Barlow Condensed'" font-weight="800" font-size="11" fill="#c0d5e5" opacity="0.7">SHOOT 2X</text>
 
-        <path class="zone" data-id="club-center" d="M 115,220 Q 100,300 115,380 L 165,365 Q 150,300 165,235 Z" />
-        <path class="zone" data-id="club-gz" d="M 175,135 Q 300,85 425,135 L 395,190 Q 300,150 205,190 Z" />
-        <path class="zone" data-id="club-gz-r1" d="M 175,465 Q 300,515 425,465 L 395,410 Q 300,450 205,410 Z" />
+        <path class="zone" data-id="glass-r1" d="M 390 232 L 510 232 L 510 248 L 390 248 Z" fill="#edd0ff" stroke="#fff" stroke-width="0.7"/>
+        <path class="zone" data-id="glass-r1" d="M 390 412 L 510 412 L 510 428 L 390 428 Z" fill="#edd0ff" stroke="#fff" stroke-width="0.7"/>
+        <rect class="zone" data-id="vault" x="420" y="195" width="60" height="35" fill="#555555" stroke="#fff" stroke-width="0.7"/>
 
-        <path class="zone" data-id="center-ice-premier" d="M 175,245 L 225,245 L 225,355 L 175,355 Z" />
-        <path class="zone" data-id="center-ice" d="M 375,245 L 425,245 L 425,355 L 375,355 Z" />
-        <path class="zone" data-id="lgz-shoot" d="M 210,400 Q 300,440 390,400 L 360,350 Q 300,380 240,350 Z" />
-        <path class="zone" data-id="lgz-defend" d="M 210,200 Q 300,160 390,200 L 360,250 Q 300,220 240,250 Z" />
+        <path class="zone" data-id="center-ice-prem" d="M 390 155 L 510 155 L 510 195 L 390 195 Z" fill="#00cc66" stroke="#fff" stroke-width="0.7"/>
+        <path class="zone" data-id="center-ice-prem" d="M 390 430 L 510 430 L 510 470 L 390 470 Z" fill="#00cc66" stroke="#fff" stroke-width="0.7"/>
 
-        <rect class="zone" data-id="glass-r1" x="245" y="270" width="110" height="15" />
-        <rect class="zone" data-id="corona-beach" x="245" y="315" width="110" height="15" />
-        <rect class="zone" data-id="amerant-vault" x="235" y="285" width="10" height="30" />
+        <path class="zone" data-id="center-ice-upper" d="M 390 120 L 510 120 L 510 155 L 390 155 Z" fill="#006633" stroke="#fff" stroke-width="0.7"/>
+        <path class="zone" data-id="center-ice-upper" d="M 390 470 L 510 470 L 510 505 L 390 505 Z" fill="#006633" stroke="#fff" stroke-width="0.7"/>
+
+        <path class="zone" data-id="blue-line-prem" d="M 340 165 L 390 155 L 390 195 L 340 195 Z" fill="#ff99bb" stroke="#fff" stroke-width="0.7"/>
+        <path class="zone" data-id="blue-line-prem" d="M 510 155 L 560 165 L 560 195 L 510 195 Z" fill="#ff99bb" stroke="#fff" stroke-width="0.7"/>
+        <path class="zone" data-id="blue-line-prem" d="M 340 430 L 390 430 L 390 470 L 340 460 Z" fill="#ff99bb" stroke="#fff" stroke-width="0.7"/>
+        <path class="zone" data-id="blue-line-prem" d="M 510 430 L 560 430 L 560 460 L 510 470 Z" fill="#ff99bb" stroke="#fff" stroke-width="0.7"/>
+
+        <path class="zone" data-id="blue-line-upper" d="M 345 128 L 390 120 L 390 155 L 340 165 Z" fill="#cc0052" stroke="#fff" stroke-width="0.7"/>
+        <path class="zone" data-id="blue-line-upper" d="M 510 120 L 555 128 L 560 165 L 510 155 Z" fill="#cc0052" stroke="#fff" stroke-width="0.7"/>
+        <path class="zone" data-id="blue-line-upper" d="M 340 460 L 390 470 L 390 505 L 345 497 Z" fill="#cc0052" stroke="#fff" stroke-width="0.7"/>
+        <path class="zone" data-id="blue-line-upper" d="M 510 470 L 560 460 L 555 497 L 510 505 Z" fill="#cc0052" stroke="#fff" stroke-width="0.7"/>
+
+        <path class="zone" data-id="side-prem-shoot" d="M 560 165 L 630 190 L 610 220 L 560 195 Z" fill="#e6ffcc" stroke="#fff" stroke-width="0.7"/>
+        <path class="zone" data-id="side-prem-shoot" d="M 560 430 L 610 405 L 630 435 L 560 460 Z" fill="#e6ffcc" stroke="#fff" stroke-width="0.7"/>
+
+        <path class="zone" data-id="side-shoot" d="M 555 128 L 615 155 L 630 190 L 560 165 Z" fill="#88cc00" stroke="#fff" stroke-width="0.7"/>
+        <path class="zone" data-id="side-shoot" d="M 560 460 L 630 435 L 615 470 L 555 497 Z" fill="#88cc00" stroke="#fff" stroke-width="0.7"/>
+
+        <path class="zone" data-id="side-prem-defend" d="M 270 190 L 340 165 L 340 195 L 290 220 Z" fill="#ffcc99" stroke="#fff" stroke-width="0.7"/>
+        <path class="zone" data-id="side-prem-defend" d="M 270 435 L 340 460 L 340 430 L 290 405 Z" fill="#ffcc99" stroke="#fff" stroke-width="0.7"/>
+
+        <path class="zone" data-id="side-defend" d="M 285 155 L 345 128 L 340 165 L 270 190 Z" fill="#ff6600" stroke="#fff" stroke-width="0.7"/>
+        <path class="zone" data-id="side-defend" d="M 270 435 L 340 460 L 345 497 L 285 505 Z" fill="#ff6600" stroke="#fff" stroke-width="0.7"/>
+
+        <path class="zone" data-id="lgz-prem-shoot" d="M 610 220 L 630 190 Q 690 230 690 330 Q 690 430 630 435 L 610 405 Q 650 370 650 330 Q 650 250 610 220 Z" fill="#99e6ff" stroke="#fff" stroke-width="0.7"/>
+
+        <path class="zone" data-id="lgz-sel-shoot" d="M 630 190 Q 715 240 715 330 Q 715 420 630 435 Q 670 390 670 330 Q 670 270 630 190 Z" fill="#3399ff" stroke="#fff" stroke-width="0.7"/>
+
+        <path class="zone" data-id="lgz-shoot-upper" d="M 615 155 Q 745 220 745 330 Q 745 440 615 470 Q 695 400 695 330 Q 695 260 615 155 Z" fill="#005580" stroke="#fff" stroke-width="0.7"/>
+
+        <path class="zone" data-id="lgz-prem-defend" d="M 290 220 Q 250 250 250 330 Q 250 370 290 405 L 270 435 Q 210 430 210 330 Q 210 230 270 190 Z" fill="#ccb3ff" stroke="#fff" stroke-width="0.7"/>
+
+        <path class="zone" data-id="lgz-sel-defend" d="M 270 190 Q 230 270 230 330 Q 230 390 270 435 Q 185 420 185 330 Q 185 240 270 190 Z" fill="#7326ff" stroke="#fff" stroke-width="0.7"/>
+
+        <path class="zone" data-id="lgz-defend-upper" d="M 285 155 Q 205 260 205 330 Q 205 400 285 505 Q 155 440 155 330 Q 155 220 285 155 Z" fill="#3c00b3" stroke="#fff" stroke-width="0.7"/>
+
+        <path class="zone" data-id="club-center" d="M 335 98 L 565 98 L 560 115 L 340 115 Z" fill="#666666" stroke="#fff" stroke-width="0.7"/>
+        <path class="zone" data-id="club-center" d="M 335 528 L 565 528 L 560 510 L 340 510 Z" fill="#666666" stroke="#fff" stroke-width="0.7"/>
+
+        <path class="zone" data-id="club-goal-zone" d="M 565 98 Q 770 180 770 330 Q 770 480 565 528 L 560 510 Q 750 450 750 330 Q 750 210 560 115 Z" fill="#ff9933" stroke="#fff" stroke-width="0.7"/>
+        <path class="zone" data-id="club-goal-zone" d="M 335 98 Q 130 180 130 330 Q 130 480 335 528 L 340 510 Q 150 450 150 330 Q 150 210 340 115 Z" fill="#ff9933" stroke="#fff" stroke-width="0.7"/>
+
+        <path class="zone" data-id="upper-side-r12" d="M 310 65 L 590 65 L 580 82 L 320 82 Z" fill="#ffff99" stroke="#fff" stroke-width="0.7"/>
+        <path class="zone" data-id="upper-side-r12" d="M 310 562 L 590 562 L 580 545 L 320 545 Z" fill="#ffff99" stroke="#fff" stroke-width="0.7"/>
+
+        <rect class="zone" data-id="upper-center" x="415" y="25" width="70" height="40" fill="#0044cc" stroke="#fff" stroke-width="0.7"/>
+        <rect class="zone" data-id="upper-center" x="415" y="562" width="70" height="40" fill="#0044cc" stroke="#fff" stroke-width="0.7"/>
+
+        <path class="zone" data-id="upper-sideline" d="M 310 25 L 415 25 L 415 65 L 310 65 Z" fill="#cc0000" stroke="#fff" stroke-width="0.7"/>
+        <path class="zone" data-id="upper-sideline" d="M 485 25 L 590 25 L 590 65 L 485 65 Z" fill="#cc0000" stroke="#fff" stroke-width="0.7"/>
+        <path class="zone" data-id="upper-sideline" d="M 310 562 L 415 562 L 415 602 L 310 602 Z" fill="#cc0000" stroke="#fff" stroke-width="0.7"/>
+        <path class="zone" data-id="upper-sideline" d="M 485 562 L 590 562 L 590 602 L 485 602 Z" fill="#cc0000" stroke="#fff" stroke-width="0.7"/>
+
+        <path class="zone" data-id="ugz-r12" d="M 590 65 Q 805 150 805 330 Q 805 510 590 562 L 580 545 Q 785 490 785 330 Q 785 170 580 82 Z" fill="#66cc99" stroke="#fff" stroke-width="0.7"/>
+        <path class="zone" data-id="ugz-r12" d="M 310 65 Q 95 150 95 330 Q 95 510 310 562 L 320 545 Q 115 490 115 330 Q 115 170 320 82 Z" fill="#66cc99" stroke="#fff" stroke-width="0.7"/>
+
+        <path class="zone" data-id="ugz-shoot-lower" d="M 590 25 Q 835 120 835 330 Q 835 540 590 602 L 590 562 Q 805 510 805 330 Q 805 150 590 65 Z" fill="#004d40" stroke="#fff" stroke-width="0.7"/>
+
+        <path class="zone" data-id="ugz-defend-lower" d="M 310 25 Q 65 120 65 330 Q 65 540 310 602 L 310 562 Q 95 510 95 330 Q 95 150 310 65 Z" fill="#330066" stroke="#fff" stroke-width="0.7"/>
+
+        <g id="labels" font-family="'Barlow Condensed'" font-weight="700" font-size="12" fill="#ffffff" text-anchor="middle" pointer-events="none">
+          <text x="450" y="145">118</text>
+          <text x="450" y="495">101</text>
+          <text x="365" y="148">116</text>
+          <text x="535" y="148">120</text>
+          <text x="365" y="492">133</text>
+          <text x="535" y="492">103</text>
+          <text x="235" y="335">DEFEND (107-113)</text>
+          <text x="665" y="335">SHOOT (123-129)</text>
+          <text x="450" y="48">318</text>
+          <text x="450" y="590">301</text>
+          <text x="110" y="335" fill="#fff">309</text>
+          <text x="790" y="335" fill="#fff">326</text>
+        </g>
       </svg>
-
       <div id="tooltip">
-        <div class="tip-name" id="tip-name"></div>
-        <div class="tip-price" id="tip-price"></div>
+        <div class="tip-name" id="tip-name">Zone</div>
+        <div class="tip-price" id="tip-price">Price</div>
       </div>
     </div>
-    <p class="map-note">* All prices shown are avg. per seat per game. All-inclusive spaces include food &amp; select beverages where noted. Prices subject to change. Does not include sales tax.</p>
   </div>
 
   <div class="pricing-side">
     <div class="pricing-header">
-      <h2>2026–27 New Member &amp; Add-On Pricing</h2>
-      <p>Average price per seat per game · Select a zone on the map or expand a tier below</p>
+      <h2>Territory Memberships</h2>
+      <p>Average Price Per Seat Per Game (44 Games Full Plan)</p>
     </div>
 
-    <div class="info-bar" id="info-bar">
-      <div class="ib-name" id="ib-name"></div>
-      <div class="ib-prices" id="ib-prices"></div>
-    </div>
-
-    <div class="col-headers">
-      <div>Pricing Category</div>
-      <div class="col-right">Full Season<br><span style="font-weight:400; opacity:0.75;">(44 Gms.)</span></div>
-      <div class="col-right">SeatGeek<br>Premier<br><span style="font-weight:400; opacity:0.75;">(25 Gms.)</span></div>
-    </div>
-
-    <button class="tier-btn open" onclick="toggleTier(this)">
-      <span>All-Inclusive Spaces <span class="tier-label-pill all-inclusive">Incl. Food &amp; Bev</span></span>
-      <span class="chevron">▼</span>
-    </button>
-    <div class="tier-panel open">
-      <div class="price-row" data-zone="glass-r1" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#bc0c24"></div><div class="row-name">Glass (Row 1) (All-Inclusive Club Access)</div></div>
-        <div class="row-price">$535</div>
-        <div class="paw">🐾</div>
+    <button class="tier-btn open" onclick="toggleTier(this, 't1')">All-Inclusive Spaces <span class="chevron">▼</span></button>
+    <div class="tier-panel open" id="t1">
+      <div class="price-row" data-zone="glass-r1">
+        <div class="row-swatch-name"><div class="swatch" style="background: #edd0ff;"></div><div class="row-name">Glass (Row 1) (All-Inclusive Club Access)</div></div>
+        <div class="row-price">$535</div><div class="row-price na">-</div>
       </div>
-      <div class="price-row" data-zone="amerant-vault" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#acacac"></div><div class="row-name">Amerant Vault (Includes food &amp; select beverages)</div></div>
-        <div class="row-price">$385</div>
-        <div class="paw">🐾</div>
-      </div>
-      <div class="price-row" data-zone="corona-beach" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#cca43c"></div><div class="row-name">Corona Beach House (Includes food &amp; select beverages)</div></div>
-        <div class="row-price">$210</div>
-        <div class="row-price gold">$284</div>
+      <div class="price-row" data-zone="vault">
+        <div class="row-swatch-name"><div class="swatch" style="background: #555555;"></div><div class="row-name">Amerant Vault (Includes Food & Beverage)</div></div>
+        <div class="row-price">$385</div><div class="row-price na">-</div>
       </div>
     </div>
 
-    <button class="tier-btn open" onclick="toggleTier(this)">
-      <span>100 Level <span class="tier-label-pill">Lower Bowl</span></span>
-      <span class="chevron">▼</span>
-    </button>
-    <div class="tier-panel open">
-      <div class="price-row" data-zone="center-ice-premier" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#e46ce4"></div><div class="row-name">Center Ice Premier (Lower Rows)</div></div>
-        <div class="row-price">$210</div>
-        <div class="paw">🐾</div>
+    <button class="tier-btn" onclick="toggleTier(this, 't2')">Lower Bowl Center & Sides <span class="chevron">▼</span></button>
+    <div class="tier-panel" id="t2">
+      <div class="price-row" data-zone="center-ice-prem">
+        <div class="row-swatch-name"><div class="swatch" style="background: #00cc66;"></div><div class="row-name">Center Ice Premier (Lower Rows)</div></div>
+        <div class="row-price">$210</div><div class="row-price na">-</div>
       </div>
-      <div class="price-row" data-zone="center-ice" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#a44ca4"></div><div class="row-name">Center Ice (Upper Rows)</div></div>
-        <div class="row-price">$199</div>
-        <div class="paw">🐾</div>
+      <div class="price-row" data-zone="center-ice-upper">
+        <div class="row-swatch-name"><div class="swatch" style="background: #006633;"></div><div class="row-name">Center Ice (Upper Rows)</div></div>
+        <div class="row-price">$199</div><div class="row-price na">-</div>
       </div>
-      <div class="price-row" data-zone="lgz-shoot" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#0c5474"></div><div class="row-name">Lower Goal Zone - Shoot 2x</div></div>
-        <div class="row-price">$85</div>
-        <div class="paw">🐾</div>
+      <div class="price-row" data-zone="blue-line-prem">
+        <div class="row-swatch-name"><div class="swatch" style="background: #ff99bb;"></div><div class="row-name">Blue Line Premier (Lower Rows)</div></div>
+        <div class="row-price">$177</div><div class="row-price na">-</div>
       </div>
-      <div class="price-row" data-zone="lgz-defend" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#4c2c74"></div><div class="row-name">Lower Goal Zone - Defend 2x</div></div>
-        <div class="row-price">$79</div>
-        <div class="paw">🐾</div>
-      </div>
-      <div class="price-row" data-zone="club-center" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#7c848c"></div><div class="row-name">Club Center</div></div>
-        <div class="row-price">$165</div>
-        <div class="paw">🐾</div>
-      </div>
-      <div class="price-row" data-zone="club-gz-r1" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#fca41c"></div><div class="row-name">Club Goal Zone (Row 1)</div></div>
-        <div class="row-price">$150</div>
-        <div class="paw">🐾</div>
-      </div>
-      <div class="price-row" data-zone="club-gz" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#e4841c"></div><div class="row-name">Club Goal Zone</div></div>
-        <div class="row-price">$130</div>
-        <div class="row-price gold">$168</div>
+      <div class="price-row" data-zone="blue-line-upper">
+        <div class="row-swatch-name"><div class="swatch" style="background: #cc0052;"></div><div class="row-name">Blue Line (Upper Rows)</div></div>
+        <div class="row-price">$155</div><div class="row-price na">-</div>
       </div>
     </div>
 
-    <button class="tier-btn" onclick="toggleTier(this)">
-      <span>300 Level <span class="tier-label-pill">Upper Bowl</span></span>
-      <span class="chevron">▼</span>
-    </button>
-    <div class="tier-panel">
-      <div class="price-row" data-zone="ucenter" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#246ca4"></div><div class="row-name">Upper Center</div></div>
-        <div class="row-price">$55</div>
-        <div class="paw">🐾</div>
+    <button class="tier-btn" onclick="toggleTier(this, 't3')">Lower Bowl Attack Flanks <span class="chevron">▼</span></button>
+    <div class="tier-panel" id="t3">
+      <div class="price-row" data-zone="side-prem-shoot">
+        <div class="row-swatch-name"><div class="swatch" style="background: #e6ffcc;"></div><div class="row-name">Sideline Premier - Shoot 2x (Lower Rows)</div></div>
+        <div class="row-price">$150</div><div class="row-price na">-</div>
       </div>
-      <div class="price-row" data-zone="usideline" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#e66c24"></div><div class="row-name">Upper Sideline</div></div>
-        <div class="row-price">$45</div>
-        <div class="row-price gold">$60</div>
+      <div class="price-row" data-zone="side-shoot">
+        <div class="row-swatch-name"><div class="swatch" style="background: #88cc00;"></div><div class="row-name">Sideline - Shoot 2x (Upper Rows)</div></div>
+        <div class="row-price">$136</div><div class="row-price na">-</div>
       </div>
-      <div class="price-row" data-zone="ugz-shoot-upper" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#bc1c24"></div><div class="row-name">Upper Goal Zone - Shoot 2x</div></div>
-        <div class="row-price">$35</div>
-        <div class="row-price gold">$47</div>
+      <div class="price-row" data-zone="side-prem-defend">
+        <div class="row-swatch-name"><div class="swatch" style="background: #ffcc99;"></div><div class="row-name">Sideline Premier - Defend 2x (Lower Rows)</div></div>
+        <div class="row-price">$140</div><div class="row-price na">-</div>
       </div>
-      <div class="price-row" data-zone="ugz-defend-upper" onclick="selectRow(this)">
-        <div class="row-swatch-name"><div class="swatch" style="background:#bc1c24"></div><div class="row-name">Upper Goal Zone - Defend 2x</div></div>
-        <div class="row-price">$35</div>
-        <div class="row-price gold">$47</div>
+      <div class="price-row" data-zone="side-defend">
+        <div class="row-swatch-name"><div class="swatch" style="background: #ff6600;"></div><div class="row-name">Sideline - Defend 2x (Upper Rows)</div></div>
+        <div class="row-price">$126</div><div class="row-price na">-</div>
       </div>
     </div>
 
-    <div class="suite-row">📞 Call for Annual Suite Pricing</div>
+    <button class="tier-btn" onclick="toggleTier(this, 't4')">Lower Bowl Goal Ends <span class="chevron">▼</span></button>
+    <div class="tier-panel" id="t4">
+      <div class="price-row" data-zone="lgz-prem-shoot">
+        <div class="row-swatch-name"><div class="swatch" style="background: #99e6ff;"></div><div class="row-name">Lower Goal Zone Premier - Shoot 2x</div></div>
+        <div class="row-price">$122</div><div class="row-price na">-</div>
+      </div>
+      <div class="price-row" data-zone="lgz-sel-shoot">
+        <div class="row-swatch-name"><div class="swatch" style="background: #3399ff;"></div><div class="row-name">Lower Goal Zone Select - Shoot 2x</div></div>
+        <div class="row-price">$95</div><div class="row-price na">-</div>
+      </div>
+      <div class="price-row" data-zone="lgz-shoot-upper">
+        <div class="row-swatch-name"><div class="swatch" style="background: #005580;"></div><div class="row-name">Lower Goal Zone - Shoot 2x (Upper)</div></div>
+        <div class="row-price">$85</div><div class="row-price na">-</div>
+      </div>
+      <div class="price-row" data-zone="lgz-prem-defend">
+        <div class="row-swatch-name"><div class="swatch" style="background: #ccb3ff;"></div><div class="row-name">Lower Goal Zone Premier - Defend 2x</div></div>
+        <div class="row-price">$113</div><div class="row-price na">-</div>
+      </div>
+      <div class="price-row" data-zone="lgz-sel-defend">
+        <div class="row-swatch-name"><div class="swatch" style="background: #7326ff;"></div><div class="row-name">Lower Goal Zone Select - Defend 2x</div></div>
+        <div class="row-price">$88</div><div class="row-price na">-</div>
+      </div>
+      <div class="price-row" data-zone="lgz-defend-upper">
+        <div class="row-swatch-name"><div class="swatch" style="background: #3c00b3;"></div><div class="row-name">Lower Goal Zone - Defend 2x (Upper)</div></div>
+        <div class="row-price">$79</div><div class="row-price na">-</div>
+      </div>
+    </div>
 
-    <div class="disclaimer">
-      🐾 Available as full-season only &nbsp;|&nbsp; All prices subject to change &nbsp;|&nbsp; Prices do not include sales tax<br>
-      Full Season = 44 games &nbsp;|&nbsp; SeatGeek Premier Plan = 25 games
+    <button class="tier-btn" onclick="toggleTier(this, 't5')">Club Level Rings <span class="chevron">▼</span></button>
+    <div class="tier-panel" id="t5">
+      <div class="price-row" data-zone="club-center">
+        <div class="row-swatch-name"><div class="swatch" style="background: #666666;"></div><div class="row-name">Club Center</div></div>
+        <div class="row-price">$165</div><div class="row-price na">-</div>
+      </div>
+      <div class="price-row" data-zone="club-goal-zone">
+        <div class="row-swatch-name"><div class="swatch" style="background: #ff9933;"></div><div class="row-name">Club Goal Zone</div></div>
+        <div class="row-price">$130</div><div class="row-price">$168</div>
+      </div>
+    </div>
+
+    <button class="tier-btn" onclick="toggleTier(this, 't6')">Upper Deck 300 Level <span class="chevron">▼</span></button>
+    <div class="tier-panel" id="t6">
+      <div class="price-row" data-zone="upper-side-r12">
+        <div class="row-swatch-name"><div class="swatch" style="background: #ffff99;"></div><div class="row-name">Upper Center/Sideline (Rows 1 & 2)</div></div>
+        <div class="row-price">$70</div><div class="row-price na">-</div>
+      </div>
+      <div class="price-row" data-zone="upper-center">
+        <div class="row-swatch-name"><div class="swatch" style="background: #0044cc;"></div><div class="row-name">Upper Center (Rows 3+)</div></div>
+        <div class="row-price">$55</div><div class="row-price na">-</div>
+      </div>
+      <div class="price-row" data-zone="upper-sideline">
+        <div class="row-swatch-name"><div class="swatch" style="background: #cc0000;"></div><div class="row-name">Upper Sideline (Rows 3+)</div></div>
+        <div class="row-price">$45</div><div class="row-price">$60</div>
+      </div>
+      <div class="price-row" data-zone="ugz-r12">
+        <div class="row-swatch-name"><div class="swatch" style="background: #66cc99;"></div><div class="row-name">Upper Goal Zone (Rows 1 & 2)</div></div>
+        <div class="row-price">$44</div><div class="row-price na">-</div>
+      </div>
+      <div class="price-row" data-zone="ugz-shoot-lower">
+        <div class="row-swatch-name"><div class="swatch" style="background: #004d40;"></div><div class="row-name">Upper Goal Zone - Shoot 2x (Lower)</div></div>
+        <div class="row-price">$35</div><div class="row-price">$47</div>
+      </div>
+      <div class="price-row" data-zone="ugz-defend-lower">
+        <div class="row-swatch-name"><div class="swatch" style="background: #330066;"></div><div class="row-name">Upper Goal Zone - Defend 2x (Lower)</div></div>
+        <div class="row-price">$35</div><div class="row-price">$47</div>
+      </div>
+    </div>
+
+    <div class="info-bar" id="live-info-bar">
+      <div class="ib-name" id="ib-title">Selected Zone</div>
+      <div class="ib-prices" id="ib-pricing">Pricing details...</div>
     </div>
   </div>
 </div>
 
 <script>
+  // Complete matching data dictionary generated from original source material
   const zoneData = {
-    'glass-r1':           { name: 'Glass (Row 1) (All-Inclusive Club Access)', full: '$535', premier: 'Full Season Only' },
-    'amerant-vault':      { name: 'Amerant Vault (Includes food & select beverages)', full: '$385', premier: 'Full Season Only' },
-    'corona-beach':       { name: 'Corona Beach House (Includes food & select beverages)', full: '$210', premier: '$284' },
-    'center-ice-premier': { name: 'Center Ice Premier (Lower Rows)', full: '$210', premier: 'Full Season Only' },
-    'center-ice':         { name: 'Center Ice (Upper Rows)', full: '$199', premier: 'Full Season Only' },
-    'lgz-shoot':          { name: 'Lower Goal Zone - Shoot 2x', full: '$85', premier: 'Full Season Only' },
-    'lgz-defend':         { name: 'Lower Goal Zone - Defend 2x', full: '$79', premier: 'Full Season Only' },
-    'club-center':        { name: 'Club Center', full: '$165', premier: 'Full Season Only' },
-    'club-gz-r1':         { name: 'Club Goal Zone (Row 1)', full: '$150', premier: 'Full Season Only' },
-    'club-gz':            { name: 'Club Goal Zone', full: '$130', premier: '$168' },
-    'ucenter':            { name: 'Upper Center', full: '$55', premier: 'Full Season Only' },
-    'usideline':          { name: 'Upper Sideline', full: '$45', premier: '$60' },
-    'ugz-shoot-upper':    { name: 'Upper Goal Zone - Shoot 2x', full: '$35', premier: '$47' },
-    'ugz-defend-upper':   { name: 'Upper Goal Zone - Defend 2x', full: '$35', premier: '$47' }
+    'glass-r1': { name: 'Glass (Row 1)', full: '$535', premier: 'N/A' },
+    'vault': { name: 'Amerant Vault', full: '$385', premier: 'N/A' },
+    'center-ice-prem': { name: 'Center Ice Premier (Lower Rows)', full: '$210', premier: 'N/A' },
+    'center-ice-upper': { name: 'Center Ice (Upper Rows)', full: '$199', premier: 'N/A' },
+    'blue-line-prem': { name: 'Blue Line Premier (Lower Rows)', full: '$177', premier: 'N/A' },
+    'blue-line-upper': { name: 'Blue Line (Upper Rows)', full: '$155', premier: 'N/A' },
+    'side-prem-shoot': { name: 'Sideline Premier - Shoot 2x (Lower Rows)', full: '$150', premier: 'N/A' },
+    'side-shoot': { name: 'Sideline - Shoot 2x (Upper Rows)', full: '$136', premier: 'N/A' },
+    'side-prem-defend': { name: 'Sideline Premier - Defend 2x (Lower Rows)', full: '$140', premier: 'N/A' },
+    'side-defend': { name: 'Sideline - Defend 2x (Upper Rows)', full: '$126', premier: 'N/A' },
+    'lgz-prem-shoot': { name: 'Lower Goal Zone Premier - Shoot 2x', full: '$122', premier: 'N/A' },
+    'lgz-sel-shoot': { name: 'Lower Goal Zone Select - Shoot 2x', full: '$95', premier: 'N/A' },
+    'lgz-shoot-upper': { name: 'Lower Goal Zone - Shoot 2x (Upper Rows)', full: '$85', premier: 'N/A' },
+    'lgz-prem-defend': { name: 'Lower Goal Zone Premier - Defend 2x', full: '$113', premier: 'N/A' },
+    'lgz-sel-defend': { name: 'Lower Goal Zone Select - Defend 2x', full: '$88', premier: 'N/A' },
+    'lgz-defend-upper': { name: 'Lower Goal Zone - Defend 2x (Upper Rows)', full: '$79', premier: 'N/A' },
+    'club-center': { name: 'Club Center (200 Level Sides)', full: '$165', premier: 'N/A' },
+    'club-goal-zone': { name: 'Club Goal Zone (200 Level Ends)', full: '$130', premier: '$168' },
+    'upper-side-r12': { name: 'Upper Center/Sideline (Rows 1 & 2)', full: '$70', premier: 'N/A' },
+    'upper-center': { name: 'Upper Center (300 Level)', full: '$55', premier: 'N/A' },
+    'upper-sideline': { name: 'Upper Sideline (300 Level)', full: '$45', premier: '$60' },
+    'ugz-r12': { name: 'Upper Goal Zone (Rows 1 & 2)', full: '$44', premier: 'N/A' },
+    'ugz-shoot-lower': { name: 'Upper Goal Zone - Shoot 2x (Lower Rows)', full: '$35', premier: '$47' },
+    'ugz-defend-lower': { name: 'Upper Goal Zone - Defend 2x (Lower Rows)', full: '$35', premier: '$47' }
   };
 
-  function toggleTier(btn) {
+  function toggleTier(btn, panelId) {
     btn.classList.toggle('open');
-    btn.nextElementSibling.classList.toggle('open');
+    const panel = document.getElementById(panelId);
+    panel.classList.toggle('open');
   }
 
-  function selectRow(row) {
-    document.querySelectorAll('.price-row.active').forEach(r => r.classList.remove('active'));
-    row.classList.add('active');
-    const zoneId = row.dataset.zone;
-    highlightZone(zoneId);
-    const d = zoneData[zoneId];
-    if (d) showInfoBar(d);
-  }
-
-  function highlightZone(id) {
-    document.querySelectorAll('.zone.active').forEach(z => z.classList.remove('active'));
-    document.querySelectorAll(`.zone[data-id="${id}"]`).forEach(z => z.classList.add('active'));
-  }
-
-  function showInfoBar(d) {
-    document.getElementById('ib-name').textContent = d.name;
-    document.getElementById('ib-prices').textContent =
-      `Full Season (44 Gms): ${d.full}/seat   |   Premier Plan (25 Gms): ${d.premier}`;
-    document.getElementById('info-bar').classList.add('show');
-  }
-
+  // Dual-Binding Map Engine Setup
   const tooltip = document.getElementById('tooltip');
+  const liveBar = document.getElementById('live-info-bar');
+
   document.querySelectorAll('.zone').forEach(zone => {
     zone.addEventListener('mouseenter', function() {
       const id = this.dataset.id;
       const d = zoneData[id];
       if (!d) return;
       document.getElementById('tip-name').textContent = d.name;
-      document.getElementById('tip-price').textContent = `Full: ${d.full}  |  Premier: ${d.premier}`;
+      document.getElementById('tip-price').textContent = `Full Plan: ${d.full} | Premier: ${d.premier}`;
       tooltip.style.display = 'block';
     });
+
     zone.addEventListener('mousemove', function(e) {
-      const cont = document.querySelector('.map-container').getBoundingClientRect();
-      tooltip.style.left = (e.clientX - cont.left + 15) + 'px';
-      tooltip.style.top  = (e.clientY - cont.top - 12) + 'px';
+      const bounds = document.querySelector('.map-container').getBoundingClientRect();
+      tooltip.style.left = (e.clientX - bounds.left + 15) + 'px';
+      tooltip.style.top = (e.clientY - bounds.top - 12) + 'px';
     });
+
     zone.addEventListener('mouseleave', function() {
       tooltip.style.display = 'none';
     });
+
     zone.addEventListener('click', function() {
       const id = this.dataset.id;
-      const d = zoneData[id];
-      if (!d) return;
-      highlightZone(id);
-      showInfoBar(d);
-      
-      document.querySelectorAll('.price-row.active').forEach(r => r.classList.remove('active'));
-      const row = document.querySelector(`.price-row[data-zone="${id}"]`);
-      if (row) {
-        row.classList.add('active');
-        row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        const panel = row.closest('.tier-panel');
-        if (panel && !panel.classList.contains('open')) {
-          panel.classList.add('open');
-          panel.previousElementSibling.classList.add('open');
-        }
-      }
+      syncSelection(id);
     });
   });
+
+  document.querySelectorAll('.price-row').forEach(row => {
+    row.addEventListener('click', function() {
+      const id = this.dataset.zone;
+      syncSelection(id);
+    });
+  });
+
+  function syncSelection(id) {
+    // Reset highlights
+    document.querySelectorAll('.zone').forEach(z => z.classList.remove('active'));
+    document.querySelectorAll('.price-row').forEach(r => r.classList.remove('active'));
+
+    // Apply Highlights to all matching vectors & lists
+    document.querySelectorAll(`.zone[data-id="${id}"]`).forEach(z => z.classList.add('active'));
+    const targetRow = document.querySelector(`.price-row[data-zone="${id}"]`);
+    
+    if (targetRow) {
+      targetRow.classList.add('active');
+      const panel = targetRow.closest('.tier-panel');
+      const btn = panel.previousElementSibling;
+      if (!panel.classList.contains('open')) {
+        panel.classList.add('open');
+        btn.classList.add('open');
+      }
+      targetRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // Populate Persistent Info Bar
+    const d = zoneData[id];
+    if (d) {
+      document.getElementById('ib-title').textContent = d.name;
+      document.getElementById('ib-pricing').textContent = `Full Season Membership Pricing: ${d.full} per game. Seageek Premier Option: ${d.premier}.`;
+      liveBar.classList.add('show');
+    }
+  }
 </script>
 </body>
 </html>
